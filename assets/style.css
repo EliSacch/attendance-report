@@ -26,3 +26,10 @@ button {
     flex-direction: column;
 }
 
+table tr:nth-child(odd) {
+    background-color: lightgrey;
+}
+td, th {
+    padding: 5px 20px;
+}
+

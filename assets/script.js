@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("add").addEventListener("click", e => add_line(e));
+    display_rows();
 });
 
 
@@ -37,11 +38,40 @@ function update_rows(newRow) {
  * This function converts the data in localStorage from String
  * to a readable table.
  * @param {String} existingRows 
- * @returns table
+ * @returns HTML table
  */
 function create_table(existingRows) {
-    const th = existingRows.split("][")[0]
-    return th
+    const headers = existingRows.split(",").slice(0, 4);
+    let body = existingRows.split(",").slice(4);
+
+    // create table
+    const table = document.createElement("table");
+    // create header
+    const thead = document.createElement("thead");
+    const thr = document.createElement("tr");
+    for (let header of headers) {
+        var th = document.createElement("th");
+        th.append(document.createTextNode(header));
+        thr.appendChild(th)
+    }
+    thead.appendChild(thr)
+    table.appendChild(thead)
+
+    // create body
+    const tbody = document.createElement("tbody");
+    for (let i=0; i< body.length; i+=4) {
+        const tr = document.createElement("tr");
+        const row = body.slice(i, i+4);
+        for (let data of row) {
+            let td = document.createElement("td");
+            td.append(document.createTextNode(data));
+            tr.appendChild(td)
+        }
+        tbody.appendChild(tr)
+    }
+    table.appendChild(tbody);
+    // return table
+    return table
 }
 
 
@@ -53,7 +83,8 @@ function display_rows() {
     const resultDiv = document.getElementById("result");
     let existingRows = localStorage.getItem("rows")
     if (existingRows != null) {
-        resultDiv.innerText = create_table(existingRows);
+        resultDiv.innerHTML = '';
+        resultDiv.appendChild(create_table(existingRows));
     }
 }
 
