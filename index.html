@@ -14,7 +14,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="assets/style.css">
     <!-- JS -->
-    <script src="assets/script.js" defer></script>
+    <script type="module" src="assets/js/script.js" defer></script>
 </head>
 
 <body>
@@ -57,17 +57,15 @@
 
     <hr />
 
-    <form action="index.html" id="save">
+    <div id="result"></div>
 
+    <form action="index.html" id="save">
         <div class="form-line">
             <div class="form-input">
                 <label for="name">Name</label>
                 <input type="text" name="name" id="name">
             </div>
         </div>
-
-        <div id="result"></div>
-
         <button>Save PDF</button>
     </form>
 
