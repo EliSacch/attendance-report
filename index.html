@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate the attendance and generate a report that can be saved.">
+    <meta name="keywords" content="attendance, report, hours calculator">
+    <meta name="author" content="Elisa Sacchelli">
+
+    <title>Attendance report</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/style.css">
+    <!-- JS -->
+    <script src="assets/script.js" defer></script>
+</head>
+
+<body>
+
+    <h1>Attendance report</h1>
+
+    <form action="index.html" id="time-form">
+
+
+        <div class="form-line">
+            <div class="form-input">
+                <label for="date">Date</label>
+                <input type="date" name="date" id="date">
+            </div>
+            <div class="form-input">
+                <label for="type">Pre/after school</label>
+                <select name="type" id="type">
+                    <option value="preschool">Pre-school</option>
+                    <option value="aftrschool">After-school</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-line">
+            <div class="form-input">
+                <label for="time-in">Arrival time:</label>
+                <input type="time" name="time-in" id="time-in">
+            </div>
+            <div class="form-input">
+                <label for="time-out">Leave time:</label>
+                <input type="time" name="time-out" id="time-out">
+            </div>
+        </div>
+
+        <button id="add">Add</button>
+
+
+    </form>
+
+    <hr />
+
+    <form action="index.html" id="save">
+
+        <div class="form-line">
+            <div class="form-input">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name">
+            </div>
+        </div>
+
+        <div id="result"></div>
+
+        <button>Save PDF</button>
+    </form>
+
+</body>
+
+</html>

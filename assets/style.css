@@ -1,0 +1,28 @@
+body {
+    font-size: 1.5rem;
+}
+
+form {
+    width: 500px;
+    margin: 0 auto;
+}
+
+input,
+select,
+option,
+button {
+    font-size: .8em;
+    padding: .5em 1em;
+}
+
+.form-line {
+    display: flex;
+    gap: 1em;
+    margin: 10px 0;
+}
+
+.form-input {
+    display: flex;
+    flex-direction: column;
+}
+
