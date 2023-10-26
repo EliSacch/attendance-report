@@ -19,13 +19,44 @@ function get_row_values() {
 
 
 /**
+ * This function is used to calculate the total hoours
+ * @param {String} In 
+ * @param {String} Out 
+ * @returns 
+ */
+function calculate_hours(In, Out) {
+    const timeIn = In.split(":").map(t => parseInt(t));
+    const timeOut = Out.split(":").map(t => parseInt(t));
+
+    // calculate difference
+    const absDiff = ((timeOut[0]*60)+timeOut[1]) - ((timeIn[0]*60)+timeIn[1]);
+    const hourDiff = Math.floor(Math.abs(absDiff/60));
+    const minDiff = Math.abs(absDiff%60);
+
+    // get result as string
+    let actual = `${hourDiff}:${minDiff<10?("0"+minDiff) : minDiff}`
+    let charged = minDiff<10 ? (
+        `${hourDiff}:00`
+    ) : (
+        `${hourDiff+1}:00`
+    );
+    if (absDiff < 0) {
+        actual = "-"+actual;
+        charged = "-"+charged;
+    };
+
+    return [actual, charged]
+}
+
+
+/**
  * This function gets the data for the new row
  * and it adds it to local storage.
  * @param {Array} newRow 
  */
 function update_rows(newRow) {
     let existingRows = localStorage.getItem("rows")
-    let header = ["date", "type", "time-in", "time-out"]
+    const header = ["date", "type", "time-in", "time-out", "actual", "charged"]
     if (existingRows === null) {
         localStorage.setItem("rows", header.concat(newRow))
     } else {
@@ -41,8 +72,9 @@ function update_rows(newRow) {
  * @returns HTML table
  */
 function create_table(existingRows) {
-    const headers = existingRows.split(",").slice(0, 4);
-    let body = existingRows.split(",").slice(4);
+    const columns = 6;
+    const headers = existingRows.split(",").slice(0, columns);
+    let body = existingRows.split(",").slice(columns);
 
     // create table
     const table = document.createElement("table");
@@ -50,7 +82,7 @@ function create_table(existingRows) {
     const thead = document.createElement("thead");
     const thr = document.createElement("tr");
     for (let header of headers) {
-        var th = document.createElement("th");
+        let th = document.createElement("th");
         th.append(document.createTextNode(header));
         thr.appendChild(th)
     }
@@ -59,9 +91,9 @@ function create_table(existingRows) {
 
     // create body
     const tbody = document.createElement("tbody");
-    for (let i=0; i< body.length; i+=4) {
+    for (let i=0; i< body.length; i+=columns) {
         const tr = document.createElement("tr");
-        const row = body.slice(i, i+4);
+        const row = body.slice(i, i+columns);
         for (let data of row) {
             let td = document.createElement("td");
             td.append(document.createTextNode(data));
@@ -97,6 +129,8 @@ function display_rows() {
 const add_line = e => {
     e.preventDefault();
     const newRow = get_row_values();
-    update_rows(newRow);
+    const hoursCount = calculate_hours(newRow[2], newRow[3])
+    alert(hoursCount);
+    update_rows(newRow.concat(hoursCount));
     display_rows();
 }
