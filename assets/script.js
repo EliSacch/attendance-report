@@ -5,16 +5,72 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 /**
+ * This function is used to display error messages
+ * @param {String} err 
+ */
+function display_error(err) {
+    const msg = document.createTextNode(err);
+    const errorDiv = document.getElementById("error");
+    errorDiv.appendChild(msg);
+    setTimeout(
+        () => errorDiv.removeChild(msg), 3000
+    );
+}
+
+
+/**
+ * This function is used to validate the form
+ * @param {HTMLFormElement} form
+ * @param {Array} requiredFields
+ */
+function validate_form(form, requiredFields) {
+    for (let field of requiredFields) {
+        if (form[field].value == "") {
+            throw (`Missing required field "${field}"`)
+        }
+    }
+    return true
+}
+
+
+/**
  * This function gets the form data and returns just the values as array
  * @returns Array
  */
 function get_row_values() {
-    const form = document.forms["time-form"]
-    return [form["date"].value,
-    form["type"].value,
-    form["time-in"].value,
-    form["time-out"].value
-    ]
+    const form = document.forms["time-form"];
+    const requiredFields = ["date", "type", "time-in", "time-out"];
+    if (validate_form(form, requiredFields)) {
+        return requiredFields.map(field => form[field].value)
+    }
+}
+
+
+/**
+ * This function is used to validate the time inputs
+ * @param {Array} timeIn 
+ * @param {Array} timeOut 
+ * @returns 
+ */
+function validate_in_out_time(timeIn, timeOut) {
+    // calculate difference
+    const absDiff = ((timeOut[0] * 60) + timeOut[1]) - ((timeIn[0] * 60) + timeIn[1]);
+    
+    if (absDiff < 0) {
+        throw ("Leave time should be after Arrival time.")
+    } else {
+        const hourDiff = Math.floor(absDiff / 60);
+        const minDiff = absDiff % 60;
+
+        // get result as string
+        let actual = `${hourDiff}:${minDiff < 10 ? ("0" + minDiff) : minDiff}`;
+        let charged = minDiff < 10 ? (
+            `${hourDiff}:00`
+        ) : (
+            `${hourDiff + 1}:00`
+        );
+        return [actual, charged]
+    }
 }
 
 
@@ -25,27 +81,14 @@ function get_row_values() {
  * @returns 
  */
 function calculate_hours(In, Out) {
-    const timeIn = In.split(":").map(t => parseInt(t));
-    const timeOut = Out.split(":").map(t => parseInt(t));
+    timeIn = In.split(":").map(t => parseInt(t));
+    timeOut = Out.split(":").map(t => parseInt(t));
 
-    // calculate difference
-    const absDiff = ((timeOut[0]*60)+timeOut[1]) - ((timeIn[0]*60)+timeIn[1]);
-    const hourDiff = Math.floor(Math.abs(absDiff/60));
-    const minDiff = Math.abs(absDiff%60);
-
-    // get result as string
-    let actual = `${hourDiff}:${minDiff<10?("0"+minDiff) : minDiff}`
-    let charged = minDiff<10 ? (
-        `${hourDiff}:00`
-    ) : (
-        `${hourDiff+1}:00`
-    );
-    if (absDiff < 0) {
-        actual = "-"+actual;
-        charged = "-"+charged;
-    };
-
-    return [actual, charged]
+    if (timeIn.includes(NaN) || timeOut.includes(NaN) || timeIn.length != 2 || timeOut.length != 2) {
+        throw ("There was an error calculating the time");
+    } else {
+        return validate_in_out_time(timeIn, timeOut);
+    }
 }
 
 
@@ -91,9 +134,9 @@ function create_table(existingRows) {
 
     // create body
     const tbody = document.createElement("tbody");
-    for (let i=0; i< body.length; i+=columns) {
+    for (let i = 0; i < body.length; i += columns) {
         const tr = document.createElement("tr");
-        const row = body.slice(i, i+columns);
+        const row = body.slice(i, i + columns);
         for (let data of row) {
             let td = document.createElement("td");
             td.append(document.createTextNode(data));
@@ -128,9 +171,12 @@ function display_rows() {
  */
 const add_line = e => {
     e.preventDefault();
-    const newRow = get_row_values();
-    const hoursCount = calculate_hours(newRow[2], newRow[3])
-    alert(hoursCount);
-    update_rows(newRow.concat(hoursCount));
+    try {
+        const newRow = get_row_values();
+        const hoursCount = calculate_hours(newRow[2], newRow[3]);
+        update_rows(newRow.concat(hoursCount));
+    } catch (err) {
+        display_error(err);
+    }
     display_rows();
 }

@@ -26,9 +26,18 @@ button {
     flex-direction: column;
 }
 
+#error {
+    background-color: lightcoral;
+}
+
+#succes {
+    background-color: lightseagreen;
+}
+
 table tr:nth-child(odd) {
     background-color: lightgrey;
 }
+
 td, th {
     padding: 5px 20px;
 }
