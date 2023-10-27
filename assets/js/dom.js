@@ -1,4 +1,4 @@
-import { delete_row } from "./data.js";
+import { delete_row, clear_all } from "./data.js";
 
 /**
  * This function is used to display error messages
@@ -71,9 +71,12 @@ function create_table(existingRows) {
  */
 export function display_rows() {
     const resultDiv = document.getElementById("result");
+    const clearBtn = document.getElementById("clear-all");
     let existingRows = localStorage.getItem("rows");
+    resultDiv.innerHTML = '';
     if (existingRows != null) {
-        resultDiv.innerHTML = '';
         resultDiv.appendChild(create_table(existingRows));
     }
+    clearBtn.style.display = resultDiv.innerHTML != "" ? "block" : "none";
+    clearBtn?.addEventListener("click", () => clear_all())
 }

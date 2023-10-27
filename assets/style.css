@@ -42,3 +42,6 @@ td, th {
     padding: 5px 20px;
 }
 
+#clear-all {
+    display: none;
+}

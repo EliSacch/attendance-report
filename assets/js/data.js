@@ -29,9 +29,24 @@ export function get_row_values() {
     }
 }
 
+
+/**
+ * This function is used to delete a row from the table and
+ * the respective data from local storage.
+ * @param {Integer} index 
+ */
 export function delete_row(index) {
     let rows = localStorage.getItem("rows").split(",");
     rows.splice(index+6, 6);
-    localStorage.setItem("rows", rows);
+    rows.length > 6 ? localStorage.setItem("rows", rows) : localStorage.removeItem("rows");
+    display_rows();
+}
+
+
+/**
+ * This function clears all data from local storage.
+ */
+export function clear_all() {
+    localStorage.removeItem("rows");
     display_rows();
 }
