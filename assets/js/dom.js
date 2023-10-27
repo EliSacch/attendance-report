@@ -21,9 +21,7 @@ export function display_error(err) {
  * @returns HTML table
  */
 function create_table(existingRows) {
-    const columns = 6;
-    const headers = existingRows.split(",").slice(0, columns);
-    let body = existingRows.split(",").slice(columns);
+    const headers = Object.keys(existingRows[0]);
 
     // create table
     const table = document.createElement("table");
@@ -43,24 +41,23 @@ function create_table(existingRows) {
 
     // create body
     const tbody = document.createElement("tbody");
-    for (let i = 0; i < body.length; i += columns) {
+    for (let row of existingRows) {
         const tr = document.createElement("tr");
-        const row = body.slice(i, i + columns);
-        for (let data of row) {
+        for (let data of headers) {
             let td = document.createElement("td");
-            td.append(document.createTextNode(data));
+            td.append(document.createTextNode(row[`${data}`]));
             tr.appendChild(td)
         }
         // create delete button
         const btn = document.createElement("button");
         btn.innerText = "Delete";
-        btn.addEventListener("click", () => delete_row(i));
-        btn.setAttribute('data-index', i);
+        const index = existingRows.indexOf(row);
+        btn.addEventListener("click", () => delete_row(index));
+        btn.setAttribute('data-index', index);
         tr.appendChild(btn);
         tbody.appendChild(tr);
     }
     table.appendChild(tbody);
-    // return table
     return table
 }
 
@@ -72,10 +69,10 @@ function create_table(existingRows) {
 export function display_rows() {
     const resultDiv = document.getElementById("result");
     const clearBtn = document.getElementById("clear-all");
-    let existingRows = localStorage.getItem("rows");
+    const existingRows = localStorage.getItem("rows");
     resultDiv.innerHTML = '';
     if (existingRows != null) {
-        resultDiv.appendChild(create_table(existingRows));
+        resultDiv.appendChild(create_table(JSON.parse(existingRows)));
     }
     clearBtn.style.display = resultDiv.innerHTML != "" ? "block" : "none";
     clearBtn?.addEventListener("click", () => clear_all())

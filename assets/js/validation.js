@@ -21,7 +21,7 @@ export function validate_in_out_time(In, Out) {
         ) : (
             `${hourDiff + 1}:00`
         );
-        return [actual, charged]
+        return {"actual": actual, "charged": charged}
     }
 }
 

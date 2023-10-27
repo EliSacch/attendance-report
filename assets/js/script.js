@@ -18,8 +18,8 @@ const add_line = e => {
     e.preventDefault();
     try {
         const newRow = get_row_values();
-        const hoursCount = calculate_hours(newRow[2], newRow[3]);
-        update_rows(newRow.concat(hoursCount));
+        const hoursCount = calculate_hours(newRow["time-in"], newRow["time-out"]);
+        update_rows({...newRow, ...hoursCount});
     } catch (err) {
         display_error(err);
     }

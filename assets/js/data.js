@@ -7,12 +7,12 @@ import { display_rows } from './dom.js';
  * @param {Array} newRow 
  */
 export function update_rows(newRow) {
-    let existingRows = localStorage.getItem("rows");
-    const header = ["date", "type", "time-in", "time-out", "actual", "charged"];
-    if (existingRows === null) {
-        localStorage.setItem("rows", header.concat(newRow));
+    let rows = JSON.parse(localStorage.getItem("rows"));
+    if (rows === null) {
+        localStorage.setItem("rows", JSON.stringify([newRow]));
     } else {
-        localStorage.setItem("rows", existingRows.split(",").concat(newRow));
+        rows.push(newRow)
+        localStorage.setItem("rows", JSON.stringify(rows));
     }
 }
 
@@ -25,7 +25,12 @@ export function get_row_values() {
     const form = document.forms["time-form"];
     const requiredFields = ["date", "type", "time-in", "time-out"];
     if (validate_form(form, requiredFields)) {
-        return requiredFields.map(field => form[field].value);
+        return requiredFields.reduce(
+            (a,b) => {
+                a[`${b}`] = form[`${b}`].value;
+                return a
+            }, {}
+        )
     }
 }
 
@@ -36,9 +41,9 @@ export function get_row_values() {
  * @param {Integer} index 
  */
 export function delete_row(index) {
-    let rows = localStorage.getItem("rows").split(",");
-    rows.splice(index+6, 6);
-    rows.length > 6 ? localStorage.setItem("rows", rows) : localStorage.removeItem("rows");
+    let rows = JSON.parse(localStorage.getItem("rows"));
+    rows.splice(index, 1);
+    rows.length > 0 ? localStorage.setItem("rows", JSON.stringify(rows)) : localStorage.removeItem("rows");
     display_rows();
 }
 
