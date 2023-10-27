@@ -63,6 +63,28 @@ function create_table(existingRows) {
 
 
 /**
+ * This function is used to display the rows in a table
+ * @param {HTMLDivElement} resultDiv 
+ * @param {Object} existingRows 
+ */
+function display_table(resultDiv, existingRows) {
+    // table
+    resultDiv.appendChild(create_table(JSON.parse(existingRows)));
+    // total
+    let total = "";
+    try {
+        total = calculate_total(JSON.parse(existingRows));
+    } catch ( err ){
+        total = err
+    }
+    const totalText = document.createTextNode(total);
+    const totalPar = document.createElement("p");
+    totalPar.appendChild(totalText);
+    resultDiv.appendChild(totalPar);
+}
+
+
+/**
  * This function gets the data from the local storage,
  * and displays it in the result div.
  */
@@ -72,14 +94,7 @@ export function display_rows() {
     const existingRows = localStorage.getItem("rows");
     resultDiv.innerHTML = '';
     if (existingRows != null) {
-        // table
-        resultDiv.appendChild(create_table(JSON.parse(existingRows)));
-        // total
-        const total = calculate_total(JSON.parse(existingRows));
-        const totalText = document.createTextNode(`Total: ${total}:00 hours`);
-        const totalPar = document.createElement("p");
-        totalPar.appendChild(totalText);
-        resultDiv.appendChild(totalPar);
+        display_table(resultDiv, existingRows);
     }
     clearBtn.style.display = resultDiv.innerHTML != "" ? "block" : "none";
     clearBtn?.addEventListener("click", () => clear_all())

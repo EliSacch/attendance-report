@@ -63,10 +63,14 @@ export function clear_all() {
  * @returns Integer
  */
 export function calculate_total(rows) {
-    let total = 0;
-    for (let row of rows) {
-        const tot = row["charged"].split(",")
-        total += parseInt(tot[0])
+    try {
+        let total = 0;
+        for (let row of rows) {
+            const tot = row["charged"].split(",")
+            total += parseInt(tot[0])
+        }
+        return `Total: ${total}:00 hours`
+    } catch {
+        throw "There was an issue calculating the total hours."
     }
-    return total
 }
