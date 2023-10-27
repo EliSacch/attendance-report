@@ -74,7 +74,12 @@ function create_table(existingRows) {
         tbody.appendChild(tr);
     }
     table.appendChild(tbody);
-    return table
+
+    // table-wrapper
+    const container = document.createElement("div");
+    container.setAttribute("id", "table-container");
+    container.appendChild(table);
+    return container
 }
 
 

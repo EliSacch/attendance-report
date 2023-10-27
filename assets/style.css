@@ -6,10 +6,13 @@
     --success: lightgreen;
 }
 body {
-    font-size: 1.2rem;
     font-family: var(--font);
     background-color: var(--dark);
     color: var(--light);
+}
+
+h1 {
+    text-align: center;
 }
 
 #messages {
@@ -38,6 +41,11 @@ section {
     padding: 1.5em;
 }
 
+#top-section {
+    display: flex;
+    justify-content: space-around;
+}
+
 form {
     margin: 30px auto;
 }
@@ -56,6 +64,14 @@ select {
 
 select {
     height: 50px;
+}
+
+.small-screen {
+    display: block;
+}
+
+.big-screen {
+    display: none;
 }
 
 button {
@@ -93,8 +109,17 @@ button.invert:hover {
 }
 
 #result-section {
+    display: flex;
+    justify-content: space-around;
+    column-gap: 200px;
     background-color: var(--light);
     color: var(--dark);
+}
+
+#table-container {
+    width: 90%;
+    margin: 0 auto;
+    overflow-x: scroll;
 }
 
 table {
@@ -149,4 +174,11 @@ table tr:nth-child(even) {
     display: none;
 }
 
-
+@media only screen and (min-width: 600px) {
+    .small-screen {
+        display: none;
+    }
+    .big-screen {
+        display: block;
+    }
+}

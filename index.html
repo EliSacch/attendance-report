@@ -15,7 +15,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <!-- CSS -->
     <link rel="stylesheet" href="assets/style.css">
     <!-- JS -->
@@ -27,52 +28,74 @@
     <h1>Attendance report</h1>
     <div id="messages"></div>
 
-<main>
+    <main>
         <!-- Add rows -->
-        <section>
-            <h2>Enter data</h2>
-            <form action="index.html" id="time-form">
-    
-                <div class="form-line">
-                    <div class="form-input">
-                        <label for="date">Date</label>
-                        <input type="date" name="date" id="date">
+        <section id="top-section">
+            <div>
+                <h2>Enter data</h2>
+                <form action="index.html" id="time-form">
+
+                    <div class="form-line">
+                        <div class="form-input">
+                            <label for="date">Date</label>
+                            <input type="date" name="date" id="date">
+                        </div>
+                        <div class="form-input">
+                            <label for="type">Pre/after school</label>
+                            <select name="type" id="type">
+                                <option value="pre-school">Pre-school</option>
+                                <option value="after-school">After-school</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-input">
-                        <label for="type">Pre/after school</label>
-                        <select name="type" id="type">
-                            <option value="pre-school">Pre-school</option>
-                            <option value="after-school">After-school</option>
-                        </select>
+
+                    <div class="form-line">
+                        <div class="form-input">
+                            <label for="time-in">Arrival time:</label>
+                            <input type="time" name="time-in" id="time-in">
+                        </div>
+                        <div class="form-input">
+                            <label for="time-out">Leave time:</label>
+                            <input type="time" name="time-out" id="time-out">
+                        </div>
                     </div>
+
+                    <button id="add">Add</button>
+
+                </form>
+            </div>
+
+            <!-- Download -->
+            <div class="big-screen">
+                <div id="download-section">
+                    <h2>Download</h2>
+                    <form action="index.html" id="download-form">
+                        <div class="form-line">
+                            <div class="form-input">
+                                <label for="name">Name</label>
+                                <input type="text" name="name" id="name">
+                            </div>
+                        </div>
+                        <button id="download">Download</button>
+                    </form>
                 </div>
-    
-                <div class="form-line">
-                    <div class="form-input">
-                        <label for="time-in">Arrival time:</label>
-                        <input type="time" name="time-in" id="time-in">
-                    </div>
-                    <div class="form-input">
-                        <label for="time-out">Leave time:</label>
-                        <input type="time" name="time-out" id="time-out">
-                    </div>
-                </div>
-    
-                <button id="add">Add</button>
-    
-            </form>
+            </div>
+
         </section>
-    
+
         <!-- Result -->
         <section id="result-section">
-            <h2>Result</h2>
-            <div id="result"></div>
-            <button id="clear-all" class="invert">Clear all</button>
+            <div>
+                <h2>Result</h2>
+                <div id="result"></div>
+                <button id="clear-all" class="invert">Clear all</button>
+            </div>
         </section>
-    
+
         <!-- Download -->
-        <section id="download-section">
-            <h2>Download</h2>
+        <section id="download-section" >
+            <div class="small-screen">
+                <h2>Download</h2>
             <form action="index.html" id="download-form">
                 <div class="form-line">
                     <div class="form-input">
@@ -82,8 +105,11 @@
                 </div>
                 <button id="download">Download</button>
             </form>
+            </div>
         </section>
-</main>
+
+
+    </main>
 
 </body>
 
