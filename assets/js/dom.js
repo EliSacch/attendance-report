@@ -43,7 +43,9 @@ function create_table(existingRows) {
         thr.appendChild(th);
     }
     // Ad one column for actions
-    thr.appendChild(document.createTextNode("Actions"));
+    let th = document.createElement("th");
+    th.appendChild(document.createTextNode("Actions"));
+    thr.appendChild(th);
     // Append all to the table head
     thead.appendChild(thr);
     table.appendChild(thead);
@@ -58,12 +60,17 @@ function create_table(existingRows) {
             tr.appendChild(td)
         }
         // create delete button
-        const btn = document.createElement("button");
-        btn.innerText = "Delete";
         const index = existingRows.indexOf(row);
+        const btn = document.createElement("button");
+        const span = document.createElement("span");
+        let td = document.createElement("td");
+        span.classList.add("material-symbols-outlined");
+        span.appendChild(document.createTextNode("delete"));
+        btn.appendChild(span);
         btn.addEventListener("click", () => delete_row(index));
         btn.setAttribute('data-index', index);
-        tr.appendChild(btn);
+        td.appendChild(btn);
+        tr.appendChild(td);
         tbody.appendChild(tr);
     }
     table.appendChild(tbody);
@@ -84,10 +91,11 @@ function display_table(resultDiv, existingRows) {
     try {
         total = calculate_total(JSON.parse(existingRows));
     } catch ( err ){
-        total = err
+        total = err;
     }
     const totalText = document.createTextNode(total);
     const totalPar = document.createElement("p");
+    totalPar.classList.add("total");
     totalPar.appendChild(totalText);
     resultDiv.appendChild(totalPar);
 }

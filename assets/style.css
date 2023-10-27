@@ -1,12 +1,11 @@
 :root {
     --font: 'Open Sans', sans-serif;
     --dark: rgb(40, 39, 42);
-    --light: rgb(227, 202, 221);
+    --light: rgb(231, 215, 231);
     --error: lightcoral;
     --success: lightgreen;
 }
 body {
-    padding: 1.5em;
     font-size: 1.2rem;
     font-family: var(--font);
     background-color: var(--dark);
@@ -36,7 +35,7 @@ body {
 }
 
 section {
-    margin-top: 50px;
+    padding: 1.5em;
 }
 
 form {
@@ -60,15 +59,26 @@ select {
 }
 
 button {
-    font-size: 2em;
+    font-size: 1.3em;
     text-transform: uppercase;
     padding: 15px 40px;
     cursor: pointer;
+    transition-duration: 1s;
+}
+
+button.invert {
+    color: var(--dark);
+    border: 2px solid var(--dark);
 }
 
 button:hover {
     background-color: var(--light);
     color: var(--dark);
+}
+
+button.invert:hover {
+    background-color: var(--dark);
+    color: var(--light);
 }
 
 .form-line {
@@ -82,14 +92,61 @@ button:hover {
     flex-direction: column;
 }
 
-table tr:nth-child(odd) {
-    background-color: lightgrey;
+#result-section {
+    background-color: var(--light);
+    color: var(--dark);
 }
 
-td, th {
-    padding: 5px 20px;
+table {
+    color: var(--light);
+}
+
+table button {
+    margin: 10px auto;
+    padding: 10px;
+    width: fit-content;
+    color: var(--light);
+    border: none;
+}
+
+table button:hover,
+table tr:nth-child(odd) button:hover {
+    background-color: var(--error);
+    color: var(--dark);
+}
+
+.material-symbols-outlined {
+    font-size: 1.5em;
+}
+
+th {
+    background-color: var(--dark);
+    padding: 20px;
+}
+
+td {
+    padding: 0 20px;
+    text-align: center;
+}
+
+table tr:nth-child(odd) {
+    background-color: rgb(81, 69, 79);
+}
+
+table tr:nth-child(even) {
+    background-color: rgb(66, 57, 64);
+}
+
+.total {
+    font-size: 2em;
+}
+
+.total::after {
+    content: " h";
 }
 
 #clear-all {
     display: none;
 }
+
+
