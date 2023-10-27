@@ -1,4 +1,4 @@
-import { delete_row, clear_all } from "./data.js";
+import { delete_row, clear_all, calculate_total } from "./data.js";
 
 /**
  * This function is used to display error messages
@@ -72,7 +72,14 @@ export function display_rows() {
     const existingRows = localStorage.getItem("rows");
     resultDiv.innerHTML = '';
     if (existingRows != null) {
+        // table
         resultDiv.appendChild(create_table(JSON.parse(existingRows)));
+        // total
+        const total = calculate_total(JSON.parse(existingRows));
+        const totalText = document.createTextNode(`Total: ${total}:00 hours`);
+        const totalPar = document.createElement("p");
+        totalPar.appendChild(totalText);
+        resultDiv.appendChild(totalPar);
     }
     clearBtn.style.display = resultDiv.innerHTML != "" ? "block" : "none";
     clearBtn?.addEventListener("click", () => clear_all())

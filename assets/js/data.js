@@ -43,7 +43,7 @@ export function get_row_values() {
 export function delete_row(index) {
     let rows = JSON.parse(localStorage.getItem("rows"));
     rows.splice(index, 1);
-    rows.length > 0 ? localStorage.setItem("rows", JSON.stringify(rows)) : localStorage.removeItem("rows");
+    rows.length > 0 ? (localStorage.setItem("rows", JSON.stringify(rows))) : localStorage.removeItem("rows");
     display_rows();
 }
 
@@ -54,4 +54,19 @@ export function delete_row(index) {
 export function clear_all() {
     localStorage.removeItem("rows");
     display_rows();
+}
+
+
+/**
+ * This function is used to calculate the total charged of all rows
+ * @param {Object} rows 
+ * @returns Integer
+ */
+export function calculate_total(rows) {
+    let total = 0;
+    for (let row of rows) {
+        const tot = row["charged"].split(",")
+        total += parseInt(tot[0])
+    }
+    return total
 }
