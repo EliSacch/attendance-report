@@ -18,8 +18,8 @@ export function update_rows(newRow) {
 
 
 /**
- * This function gets the form data and returns just the values as array
- * @returns Array
+ * This function gets the form data and returns just the values as Object
+ * @returns Object
  */
 export function get_row_values() {
     const form = document.forms["time-form"];
@@ -31,6 +31,18 @@ export function get_row_values() {
                 return a
             }, {}
         )
+    }
+}
+
+
+/**
+ * This function check if a name was provided before generating csv
+ * @returns String
+ */
+export function get_name() {
+    const form = document.forms["download-form"];
+    if (validate_form(form, ["name",])) {
+        return form["name"].value;
     }
 }
 

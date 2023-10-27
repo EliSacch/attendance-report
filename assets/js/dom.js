@@ -4,9 +4,9 @@ import { delete_row, clear_all, calculate_total } from "./data.js";
  * This function is used to display error messages
  * @param {String} err 
  */
-export function display_error(err) {
+export function display_error(err, type) {
     const msg = document.createTextNode(err);
-    const errorDiv = document.getElementById("error");
+    const errorDiv = document.getElementById(`${type}-error`);
     errorDiv.appendChild(msg);
     setTimeout(
         () => errorDiv.removeChild(msg), 3000

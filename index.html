@@ -21,55 +21,66 @@
 
     <h1>Attendance report</h1>
 
-    <form action="index.html" id="time-form">
+    <!-- Add rows -->
+    <section>
+        <h2>Enter data</h2>
+        <form action="index.html" id="time-form">
 
-        <div class="form-line">
-            <div class="form-input">
-                <label for="date">Date</label>
-                <input type="date" name="date" id="date">
+            <div class="form-line">
+                <div class="form-input">
+                    <label for="date">Date</label>
+                    <input type="date" name="date" id="date">
+                </div>
+                <div class="form-input">
+                    <label for="type">Pre/after school</label>
+                    <select name="type" id="type">
+                        <option value="pre-school">Pre-school</option>
+                        <option value="after-school">After-school</option>
+                    </select>
+                </div>
             </div>
-            <div class="form-input">
-                <label for="type">Pre/after school</label>
-                <select name="type" id="type">
-                    <option value="pre-school">Pre-school</option>
-                    <option value="after-school">After-school</option>
-                </select>
+
+            <div class="form-line">
+                <div class="form-input">
+                    <label for="time-in">Arrival time:</label>
+                    <input type="time" name="time-in" id="time-in">
+                </div>
+                <div class="form-input">
+                    <label for="time-out">Leave time:</label>
+                    <input type="time" name="time-out" id="time-out">
+                </div>
             </div>
-        </div>
 
-        <div class="form-line">
-            <div class="form-input">
-                <label for="time-in">Arrival time:</label>
-                <input type="time" name="time-in" id="time-in">
+            <button id="add">Add</button>
+
+        </form>
+    </section>
+
+    <!-- Result -->
+    <section>
+        <h2>Result</h2>
+        <div id="add-error"></div>
+        <div id="success"></div>
+
+        <div id="result"></div>
+        <button id="clear-all">Clear all</button>
+    </section>
+
+    <!-- Download -->
+    <section>
+        <h2>Download</h2>
+        <div id="download-error"></div>
+        <form action="index.html" id="download-form">
+            <div class="form-line">
+                <div class="form-input">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name">
+                </div>
             </div>
-            <div class="form-input">
-                <label for="time-out">Leave time:</label>
-                <input type="time" name="time-out" id="time-out">
-            </div>
-        </div>
+            <button id="download">Download</button>
+        </form>
+    </section>
 
-        <button id="add">Add</button>
+</body >
 
-    </form>
-
-    <div id="error"></div>
-    <div id="success"></div>
-
-    <hr />
-
-    <div id="result"></div>
-    <button id="clear-all">Clear all</button>
-
-    <form action="index.html" id="save">
-        <div class="form-line">
-            <div class="form-input">
-                <label for="name">Name</label>
-                <input type="text" name="name" id="name">
-            </div>
-        </div>
-        <button>Save PDF</button>
-    </form>
-
-</body>
-
-</html>
+</html >

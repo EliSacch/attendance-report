@@ -26,7 +26,8 @@ button {
     flex-direction: column;
 }
 
-#error {
+#add-error,
+#download-error {
     background-color: lightcoral;
 }
 
