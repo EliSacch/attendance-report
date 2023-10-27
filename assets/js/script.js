@@ -1,7 +1,7 @@
 import { update_rows, get_row_values, get_name, calculate_total } from './data.js';
 import { calculate_hours } from './utilities.js';
 import { display_error, display_rows } from './dom.js';
-import { get_csv } from './download.js';
+import { get_csv, download_csv } from './download.js';
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -40,8 +40,8 @@ const download = e => {
     const total = calculate_total(data);
     try {
         const name = get_name();
-        const csvData = get_csv(name, total, data);
-        alert(csvData);
+        const csvData = get_csv(total, data);
+        download_csv(name, csvData);
     } catch (err) {
         display_error(err, "download");
     }

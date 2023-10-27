@@ -81,8 +81,8 @@ export function calculate_total(rows) {
             const tot = row["charged"].split(",")
             total += parseInt(tot[0])
         }
-        return `Total: ${total}:00 hours`
+        return `Total: ${total}:00`;
     } catch {
-        throw "There was an issue calculating the total hours."
+        throw "There was an issue calculating the total hours.";
     }
 }
