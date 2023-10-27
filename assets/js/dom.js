@@ -1,3 +1,5 @@
+import { delete_row } from "./data.js";
+
 /**
  * This function is used to display error messages
  * @param {String} err 
@@ -31,10 +33,13 @@ function create_table(existingRows) {
     for (let header of headers) {
         let th = document.createElement("th");
         th.append(document.createTextNode(header));
-        thr.appendChild(th)
+        thr.appendChild(th);
     }
-    thead.appendChild(thr)
-    table.appendChild(thead)
+    // Ad one column for actions
+    thr.appendChild(document.createTextNode("Actions"));
+    // Append all to the table head
+    thead.appendChild(thr);
+    table.appendChild(thead);
 
     // create body
     const tbody = document.createElement("tbody");
@@ -46,7 +51,13 @@ function create_table(existingRows) {
             td.append(document.createTextNode(data));
             tr.appendChild(td)
         }
-        tbody.appendChild(tr)
+        // create delete button
+        const btn = document.createElement("button");
+        btn.innerText = "Delete";
+        btn.addEventListener("click", () => delete_row(i));
+        btn.setAttribute('data-index', i);
+        tr.appendChild(btn);
+        tbody.appendChild(tr);
     }
     table.appendChild(tbody);
     // return table
@@ -60,7 +71,7 @@ function create_table(existingRows) {
  */
 export function display_rows() {
     const resultDiv = document.getElementById("result");
-    let existingRows = localStorage.getItem("rows")
+    let existingRows = localStorage.getItem("rows");
     if (existingRows != null) {
         resultDiv.innerHTML = '';
         resultDiv.appendChild(create_table(existingRows));
