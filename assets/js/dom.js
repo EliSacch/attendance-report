@@ -1,15 +1,24 @@
 import { delete_row, clear_all, calculate_total } from "./data.js";
 
 /**
- * This function is used to display error messages
+ * This function is used to display error/success messages
  * @param {String} err 
  */
-export function display_error(err, type) {
+export function display_message(err, type) {
     const msg = document.createTextNode(err);
-    const errorDiv = document.getElementById(`${type}-error`);
-    errorDiv.appendChild(msg);
+    const span = document.createElement("span");
+    const messages = document.getElementById("messages");
+    span.appendChild(msg);
+    span.classList.add(type);
+    messages.appendChild(span);
     setTimeout(
-        () => errorDiv.removeChild(msg), 3000
+        () => span.style.opacity = 1, 300
+    );
+    setTimeout(
+        () => span.style.opacity = 0, 4500
+    );
+    setTimeout(
+        () => messages.removeChild(span), 5200
     );
 }
 
@@ -90,12 +99,18 @@ function display_table(resultDiv, existingRows) {
  */
 export function display_rows() {
     const resultDiv = document.getElementById("result");
-    const clearBtn = document.getElementById("clear-all");
     const existingRows = localStorage.getItem("rows");
     resultDiv.innerHTML = '';
     if (existingRows != null) {
         display_table(resultDiv, existingRows);
+    } else {
+        resultDiv.innerHTML = 'No data entered.';
     }
-    clearBtn.style.display = resultDiv.innerHTML != "" ? "block" : "none";
+
+    // hide elements if there is no result to display
+    const clearBtn = document.getElementById("clear-all");
+    clearBtn.style.display = existingRows != null ? "block" : "none";
     clearBtn?.addEventListener("click", () => clear_all())
+    const downloadSection = document.getElementById("download-section");
+    downloadSection.style.display = existingRows != null ? "block" : "none";
 }

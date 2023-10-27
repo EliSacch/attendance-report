@@ -1,18 +1,74 @@
+:root {
+    --font: 'Open Sans', sans-serif;
+    --dark: rgb(40, 39, 42);
+    --light: rgb(227, 202, 221);
+    --error: lightcoral;
+    --success: lightgreen;
+}
 body {
-    font-size: 1.5rem;
+    padding: 1.5em;
+    font-size: 1.2rem;
+    font-family: var(--font);
+    background-color: var(--dark);
+    color: var(--light);
+}
+
+#messages {
+    position: fixed;
+    top: 20px;
+    right: 50px;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.error,
+.success {
+    opacity: 0;
+    padding: 10px 50px;
+    font-size: 1.2em;
+    color: var(--dark);
+    background-color: var(--error);
+    transition-duration: 1s;
+}
+
+.success {
+    background-color: var(--success);
+}
+
+section {
+    margin-top: 50px;
 }
 
 form {
-    width: 500px;
-    margin: 0 auto;
+    margin: 30px auto;
 }
 
 input,
-select,
-option,
+button,
+select {
+    margin: 10px 0;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: var(--light);
+    background-color: transparent;
+    border: 1px solid var(--light);
+    border-radius: 4px;
+}
+
+select {
+    height: 50px;
+}
+
 button {
-    font-size: .8em;
-    padding: .5em 1em;
+    font-size: 2em;
+    text-transform: uppercase;
+    padding: 15px 40px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--light);
+    color: var(--dark);
 }
 
 .form-line {
@@ -24,15 +80,6 @@ button {
 .form-input {
     display: flex;
     flex-direction: column;
-}
-
-#add-error,
-#download-error {
-    background-color: lightcoral;
-}
-
-#succes {
-    background-color: lightseagreen;
 }
 
 table tr:nth-child(odd) {

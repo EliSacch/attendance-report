@@ -1,6 +1,6 @@
 import { update_rows, get_row_values, get_name, calculate_total } from './data.js';
 import { calculate_hours } from './utilities.js';
-import { display_error, display_rows } from './dom.js';
+import { display_message, display_rows } from './dom.js';
 import { get_csv, download_csv } from './download.js';
 
 
@@ -22,8 +22,9 @@ const add_line = e => {
         const newRow = get_row_values();
         const hoursCount = calculate_hours(newRow["time-in"], newRow["time-out"]);
         update_rows({ ...newRow, ...hoursCount });
+        display_message("Data added", "success");
     } catch (err) {
-        display_error(err, "add");
+        display_message(err, "error");
     }
     display_rows();
 }
@@ -43,6 +44,6 @@ const download = e => {
         const csvData = get_csv(total, data);
         download_csv(name, csvData);
     } catch (err) {
-        display_error(err, "download");
+        display_message(err, "error");
     }
 }
