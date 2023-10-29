@@ -69,11 +69,11 @@ input::-webkit-calendar-picker-indicator {
     margin-right: 2px;
     opacity: 0.6;
     filter: invert(0.8);
-  }
-  
-  input::-webkit-calendar-picker-indicator:hover {
+}
+
+input::-webkit-calendar-picker-indicator:hover {
     opacity: 1
-  }
+}
 
 select {
     height: 50px;
@@ -122,25 +122,25 @@ button.invert:hover {
 }
 
 #result-section {
-    display: flex;
-    justify-content: space-around;
-    column-gap: 200px;
     background-color: var(--light);
     color: var(--dark);
 }
 
 #table-container {
-    width: 90%;
+    position: relative;
+    width: 100%;
+    max-width: 800px;
     margin: 0 auto;
     overflow-x: scroll;
 }
 
 table {
+    width: 100%;
     color: var(--light);
 }
 
 table button {
-    margin: 10px auto;
+    margin: 5px auto;
     padding: 10px;
     width: fit-content;
     color: var(--light);
@@ -191,6 +191,7 @@ table tr:nth-child(even) {
     .small-screen {
         display: none;
     }
+
     .big-screen {
         display: block;
     }
