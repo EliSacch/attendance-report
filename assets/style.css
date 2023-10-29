@@ -5,6 +5,7 @@
     --error: lightcoral;
     --success: lightgreen;
 }
+
 body {
     font-family: var(--font);
     background-color: var(--dark);
@@ -62,6 +63,18 @@ select {
     border-radius: 4px;
 }
 
+input::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 2px;
+    opacity: 0.6;
+    filter: invert(0.8);
+  }
+  
+  input::-webkit-calendar-picker-indicator:hover {
+    opacity: 1
+  }
+
 select {
     height: 50px;
 }
@@ -75,7 +88,7 @@ select {
 }
 
 button {
-    font-size: 1.3em;
+    font-size: 1.1em;
     text-transform: uppercase;
     padding: 15px 40px;
     cursor: pointer;

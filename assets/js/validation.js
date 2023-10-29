@@ -16,7 +16,7 @@ export function validate_in_out_time(In, Out) {
 
         // get result as string
         let actual = `${hourDiff}:${minDiff < 10 ? ("0" + minDiff) : minDiff}`;
-        let charged = minDiff < 10 ? (
+        let charged = minDiff <= 10 ? (
             `${hourDiff}:00`
         ) : (
             `${hourDiff + 1}:00`
