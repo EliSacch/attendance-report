@@ -124,6 +124,8 @@ export function display_rows() {
     const clearBtn = document.getElementById("clear-all");
     clearBtn.style.display = existingRows != null ? "block" : "none";
     clearBtn?.addEventListener("click", () => clear_all())
-    const downloadSection = document.getElementById("download-section");
-    downloadSection.style.display = existingRows != null ? "block" : "none";
+    const downloadSections = document.getElementsByClassName("download-section");
+    for (let downloadSection of downloadSections) {
+        downloadSection.style.display = existingRows != null ? "block" : "none";
+    }
 }

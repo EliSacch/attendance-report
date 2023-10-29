@@ -6,7 +6,8 @@ import { get_csv, download_csv } from './download.js';
 
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("add").addEventListener("click", e => add_line(e));
-    document.getElementById("download").addEventListener("click", e => download(e));
+    document.getElementById("download-form").addEventListener("submit", e => download(e));
+    document.getElementById("download-form-small").addEventListener("submit", e => download(e));
     display_rows();
 });
 
@@ -39,8 +40,9 @@ const download = e => {
     e.preventDefault();
     const data = JSON.parse(localStorage.getItem("rows"));
     const total = calculate_total(data);
+    const form = e.target;
     try {
-        const name = get_name();
+        const name = get_name(form);
         const csvData = get_csv(total, data);
         download_csv(name, csvData);
     } catch (err) {

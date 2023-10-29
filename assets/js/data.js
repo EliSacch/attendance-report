@@ -39,8 +39,7 @@ export function get_row_values() {
  * This function check if a name was provided before generating csv
  * @returns String
  */
-export function get_name() {
-    const form = document.forms["download-form"];
+export function get_name(form) {
     if (validate_form(form, ["name",])) {
         return form["name"].value;
     }

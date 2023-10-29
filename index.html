@@ -25,10 +25,12 @@
 
 <body>
 
-    <h1>Attendance report</h1>
-    <div id="messages"></div>
-
     <main>
+        <h1>Attendance report</h1>
+        <section id="messages-section">
+            <div id="messages"></div>
+        </section>
+
         <!-- Add rows -->
         <section id="top-section">
             <div>
@@ -43,8 +45,8 @@
                         <div class="form-input">
                             <label for="type">Pre/after school</label>
                             <select name="type" id="type">
-                                <option value="pre-school">Pre-school</option>
                                 <option value="after-school">After-school</option>
+                                <option value="pre-school">Pre-school</option>
                             </select>
                         </div>
                     </div>
@@ -67,13 +69,13 @@
 
             <!-- Download -->
             <div class="big-screen">
-                <div id="download-section">
+                <div class="download-section">
                     <h2>Download</h2>
                     <form action="index.html" id="download-form">
                         <div class="form-line">
                             <div class="form-input">
                                 <label for="name">Name</label>
-                                <input type="text" name="name" id="name">
+                                <input type="text" name="name">
                             </div>
                         </div>
                         <button id="download">Download</button>
@@ -93,18 +95,18 @@
         </section>
 
         <!-- Download -->
-        <section id="download-section" >
+        <section class="download-section">
             <div class="small-screen">
                 <h2>Download</h2>
-            <form action="index.html" id="download-form">
-                <div class="form-line">
-                    <div class="form-input">
-                        <label for="name">Name</label>
-                        <input type="text" name="name" id="name">
+                <form action="index.html" id="download-form-small">
+                    <div class="form-line">
+                        <div class="form-input">
+                            <label for="name">Name</label>
+                            <input type="text" name="name">
+                        </div>
                     </div>
-                </div>
-                <button id="download">Download</button>
-            </form>
+                    <button id="download2">Download</button>
+                </form>
             </div>
         </section>
 
