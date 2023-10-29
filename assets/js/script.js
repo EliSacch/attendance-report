@@ -8,6 +8,9 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("add").addEventListener("click", e => add_line(e));
     document.getElementById("download-form").addEventListener("submit", e => download(e));
     document.getElementById("download-form-small").addEventListener("submit", e => download(e));
+    document.getElementById("date").valueAsDate = new Date();
+    document.getElementById("time-in").defaultValue = `${new Date().getHours()}:00`;
+    document.getElementById("time-out").defaultValue = `${new Date().getHours() + 1}:00`;
     display_rows();
 });
 
